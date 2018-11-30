@@ -77,44 +77,21 @@ def customer_can_afford_pet(customer,pet)
 end
 
 def sell_pet_to_customer(shop,pet,customer)
-
-  if pet == nil || customer[:cash] < pet[:price]
-    customer[:pets].count
-    shop[:admin][:pets_sold] += 0
-    customer[:cash] -= 0
-    shop[:admin][:total_cash] += 0
+  if pet == nil || customer_can_afford_pet(customer,pet) == false
+    customer_pet_count(customer)
+    pets_sold(shop)
+    customer_cash(customer)
+    total_cash(shop)
   else
     for animal in shop[:pets]
       if animal[:name] == pet[:name]
-        customer[:pets].push(pet)
-        customer[:pets].count
-        shop[:admin][:pets_sold] += 1
-        customer[:cash] -= pet[:price]
-        shop[:admin][:total_cash] += pet[:price]
+        amount = pet[:price]
+        add_pet_to_customer(customer,pet)
+        customer_pet_count(customer)
+        increase_pets_sold(shop,1)
+        remove_customer_cash(customer,amount)
+        add_or_remove_cash(shop,amount)
       end
     end
   end
-
-
-
-
-
-
-
-
-
-
-    # customer[:pets].push(pet)
-    # customer[:pets].count
-    # shop[:admin][:pets_sold] += 1
-    # customer[:cash] -= pet[:price]
-    # shop[:admin][:total_cash] += pet[:price]
-
-
-    # customer[:pets].count
-    # shop[:admin][:pets_sold] += 0
-    # customer[:cash] -= 0
-    # shop[:admin][:total_cash] += 0
-
-
-  end
+end
