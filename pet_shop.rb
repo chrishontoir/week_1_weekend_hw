@@ -75,3 +75,46 @@ def customer_can_afford_pet(customer,pet)
   end
   return false
 end
+
+def sell_pet_to_customer(shop,pet,customer)
+
+  if pet == nil || customer[:cash] < pet[:price]
+    customer[:pets].count
+    shop[:admin][:pets_sold] += 0
+    customer[:cash] -= 0
+    shop[:admin][:total_cash] += 0
+  else
+    for animal in shop[:pets]
+      if animal[:name] == pet[:name]
+        customer[:pets].push(pet)
+        customer[:pets].count
+        shop[:admin][:pets_sold] += 1
+        customer[:cash] -= pet[:price]
+        shop[:admin][:total_cash] += pet[:price]
+      end
+    end
+  end
+
+
+
+
+
+
+
+
+
+
+    # customer[:pets].push(pet)
+    # customer[:pets].count
+    # shop[:admin][:pets_sold] += 1
+    # customer[:cash] -= pet[:price]
+    # shop[:admin][:total_cash] += pet[:price]
+
+
+    # customer[:pets].count
+    # shop[:admin][:pets_sold] += 0
+    # customer[:cash] -= 0
+    # shop[:admin][:total_cash] += 0
+
+
+  end
